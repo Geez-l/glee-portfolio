@@ -14,16 +14,9 @@ export default function Home() {
   return (
     <div>
       <section>
-        {/* NAVBAR */}
-        <Navbar bg="light" expand="lg" className="mb-3">
-          <Container>
-            {/* <Navbar.Brand href="#home">Portfolio</Navbar.Brand> */}
-            <Nav className="ms-auto">
-              <Button variant="outline-sucess">Download CV</Button>
-            </Nav>
-          </Container>
-        </Navbar>
-
+        <Container>
+          <Button variant="outline-success">Download CV</Button>
+        </Container>
         {/* FIRST PART OF CV */}
         <Container fluid>
           <Row className="w-100 mb-2">
