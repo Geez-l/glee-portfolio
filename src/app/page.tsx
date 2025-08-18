@@ -1,13 +1,11 @@
 "use client";
 import Image from "next/image";
-import styles from "./page.module.css";
 import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
 import Card from "react-bootstrap/Card";
-import Navbar from "react-bootstrap/Navbar";
 import {Row, Col, Container} from "react-bootstrap";
-import  Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
+import { projects_data, experiences_data } from "./component/data";
 
 
 export default function Home() {
@@ -60,18 +58,25 @@ export default function Home() {
       <section>
         <h1 className="fw-fold">Projects I'd Worked On</h1>
         <div className="container">
-          <h5 className="fs-6">Featured Project</h5>
+          {projects_data.map((item, idx) => (
+            <Card className="projects-container">
+              <h5 className="fw-fold">Featured Projects</h5>
+              <Card.Header className="fs-6">
+                <span className="fw-fold">|</span>{item.title}
+              </Card.Header>
+            </Card>
+          ))}
+
           <h2 className="fw-fold">The Philippine Sponge Guide</h2>
           <div className="container-text">
             <h5 className="fs-6">
               The Philippine Sponge Guide is a searchable database of
               information on marine sponges in the Philippines as collected by
               the Marine Science Institute of the University of the Philippines
-              Diliman (UP MSI).</h5>
+              Diliman (UP MSI).
+            </h5>
           </div>
-          <div className="container-bottom">
-            
-          </div>
+          <div className="container-bottom"></div>
         </div>
       </section>
     </div>
