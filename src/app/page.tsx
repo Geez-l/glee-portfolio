@@ -64,10 +64,12 @@ export default function Home() {
               <Card.Header className="fs-6">
                 <span className="fw-fold">|</span>{item.title}
               </Card.Header>
+              <Card.Body className="fw-normal">{item.subsubtitle}</Card.Body>
+              
             </Card>
           ))}
 
-          <h2 className="fw-fold">The Philippine Sponge Guide</h2>
+          {/* <h2 className="fw-fold">The Philippine Sponge Guide</h2>
           <div className="container-text">
             <h5 className="fs-6">
               The Philippine Sponge Guide is a searchable database of
@@ -76,7 +78,7 @@ export default function Home() {
               Diliman (UP MSI).
             </h5>
           </div>
-          <div className="container-bottom"></div>
+          <div className="container-bottom"></div> */}
         </div>
       </section>
     </div>
