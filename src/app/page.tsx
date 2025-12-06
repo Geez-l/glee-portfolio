@@ -63,7 +63,7 @@ export default function Home() {
               </p>
 
               <div className="d-flex justify-content-center gap-2 mb-3">
-                <button
+                {/* <button
                   className="btn btn-primary"
                   onClick={() => {
                     const link = document.createElement("a");
@@ -75,7 +75,15 @@ export default function Home() {
                   }}
                 >
                   Download CV
-                </button>
+                </button> */}
+                <a
+                  href="/assets/Pajarilla_resume.pdf"
+                  download
+                  className="btn btn-primary"
+                >
+                  Download CV
+                </a>
+
                 {/* <Button as="a" href="mailto:pajarilla.gliezelann@gmail.com" className="btn btn-success">Contact Me</Button> */}
                 <ContactModal />
               </div>
@@ -88,7 +96,6 @@ export default function Home() {
       <section className="py-5">
         <Container>
           <h1 className="fw-bold mb-4 text-center">Projects I'd Worked On</h1>
-          
 
           {/* LOOP THROUGH ALL PROJECTS */}
           {projects_data.map((project, idx) => {
@@ -287,7 +294,7 @@ export default function Home() {
                 mobile and web, UI/UX, project management, and development.
               </p>
               <div className="d-flex justify-content-center gap-2 mb-3">
-                <button
+                {/* <button
                   className="btn btn-primary"
                   onClick={() => {
                     const link = document.createElement("a");
@@ -299,7 +306,15 @@ export default function Home() {
                   }}
                 >
                   Download CV
-                </button>
+                </button> */}
+                <a
+                  href="/assets/Pajarilla_resume.pdf"
+                  download
+                  className="btn btn-primary"
+                >
+                  Download CV
+                </a>
+
                 <ContactModal />
               </div>
             </Col>
