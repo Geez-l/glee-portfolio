@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import { projects_data, experiences_data, contact_data} from "./component/data";
+import { projects_data, experiences_data, documentation_data, contact_data, testimonial_data} from "./component/data";
 import ContactModal from "../app/component/contact";
 
 
@@ -63,19 +63,6 @@ export default function Home() {
               </p>
 
               <div className="d-flex justify-content-center gap-2 mb-3">
-                {/* <button
-                  className="btn btn-primary"
-                  onClick={() => {
-                    const link = document.createElement("a");
-                    link.href = "/assets/Pajarilla_resume.pdf";
-                    link.setAttribute("download", "Pajarilla_resume.pdf");
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                  }}
-                >
-                  Download CV
-                </button> */}
                 <a
                   href="/assets/Pajarilla_resume.pdf"
                   download
@@ -275,6 +262,99 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* DOCUMENTATION USING */}
+      <section className="py-5 mt-10" style={{ minHeight: "85vh" }}>
+        <Container>
+          <h1 className="fw-bold text-center" style={{ fontSize: "2.5rem" }}>
+            Documentation
+          </h1>
+          {/* <h2 className="fw-bold" style={{ fontSize: "2rem" }}>
+            O.N.E for JUAN
+          </h2> */}
+
+          {documentation_data.map((doc, idx) => (
+            <div key={idx} className="mb-5">
+              <h3 className="align-items-center justify-content-center">
+                {doc.title}{" "}
+              </h3>
+
+              <Row className="justify-content-center">
+                {doc.img1.map((img, i) => (
+                  <Col
+                    md={4}
+                    sm={6}
+                    xs={12}
+                    key={i}
+                    className="mb-3 d-flex justify-content-center"
+                  >
+                    <div
+                      style={{
+                        position: "relative",
+                        width: "100%",
+                        maxWidth: "500px", // controls how large they appear
+                        aspectRatio: "16 / 9", // SAME ratio as 2048x1152
+                        overflow: "hidden",
+                        borderRadius: "0.5rem",
+                        boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)",
+                      }}
+                    >
+                      <Image
+                        src={`/assets/documentation/${doc.folder}/${img}`}
+                        alt={`${doc.title} ${i + 1}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        style={{
+                          objectFit: "cover", // crops excess, no stretching
+                        }}
+                      />
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+
+              <div className="text-center text-muted mt-2">{doc.credits}</div>
+            </div>
+          ))}
+        </Container>
+      </section>
+
+      {/* Testimonies */}
+      <section className="py-5 mt-10" style={{ minHeight: "85vh" }}>
+        <Container>
+          <h1 className="fw-bold text-center" style={{ fontSize: "2.5rem" }}>
+            Testimony
+          </h1>
+              <Row className="justify-content">
+              {testimonial_data.map((test, idx) => (
+                <Col md={6} key={idx} className="mb-4 d-flex justify-content-center">
+                  <div
+                    style={{
+                      backgroundColor:"#2c3e50",
+                      borderRadius: "12px",
+                      padding: "20px",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                      display: "flex",
+                      flexDirection:"column",
+                      justifyContent:"space-between",
+                      minHeight: "250px",
+                    }}
+                  >
+                    <p style={{ fontStyle:"italic", marginBottom: "20px", lineHeight:"1.5"}}>
+                      "{test.testimony}"
+                    </p>
+
+                    {/* Profile */}
+                    <div style={{borderTop: "1px solid rgba(255.255.255,0.2)", paddingTop:"10px"}}>
+                      <div style={{fontWeight: "bold"}}>{test.name}</div>
+                      <div style={{fontSize: "0.9rem", opacity: "0.8"}}>{test.position}</div>
+                    </div>
+                    </div>
+                </Col>
+                ))}
+              </Row>
+        </Container>
       </section>
 
       {/* GET IN TOUCH SECTION */}

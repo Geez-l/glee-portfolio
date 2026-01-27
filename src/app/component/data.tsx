@@ -1,3 +1,4 @@
+import test from "node:test";
 
 export const projects_data = [
   {
@@ -77,7 +78,7 @@ export const experiences_data = [
     banner: ["banner1.jpg"],
   },
   {
-    place: "PHILIPPINE GENOME CENTER",
+    place: "PHILIPPINE GENOME CENTER DILIMAN",
     position: "Intern, Bionformatics Training and Internship Program",
     date: "July - August 2025",
     job_description: `Student intern for the Bioinformatics Training and Internship Program of the Philippine Genome Center.
@@ -95,24 +96,24 @@ export const experiences_data = [
     logo: ["logo2.png"],
     banner: ["banner4.jpg"],
   },
-  {
-    place: "TRUALLIANT BUSINESS PROCESS OUTSOURCING INC",
-    position: "Customer Service Representative",
-    date: "May - August 2021",
-    job_description: `Handled customer service inquiries and concerns in a fast-paced environment, developing excellent communication,
-      problem-solving, and conflict-resolution skills.`,
-    logo: ["logo4.jpeg"],
-    banner: ["banner5.jpeg"],
-  },
-  {
-    place: "INSPIRO",
-    position: "Customer Service Representative",
-    date: "April - May 2021",
-    job_description: `Handled customer service interactions professionally, improving client satisfaction and customer experience through
-      consistent support and troubleshooting.`,
-    logo: ["logo5.jpeg"],
-    banner: ["banner6.jpg"],
-  },
+  // {
+  //   place: "TRUALLIANT BUSINESS PROCESS OUTSOURCING INC",
+  //   position: "Customer Service Representative",
+  //   date: "May - August 2021",
+  //   job_description: `Handled customer service inquiries and concerns in a fast-paced environment, developing excellent communication,
+  //     problem-solving, and conflict-resolution skills.`,
+  //   logo: ["logo4.jpeg"],
+  //   banner: ["banner5.jpeg"],
+  // },
+  // {
+  //   place: "INSPIRO",
+  //   position: "Customer Service Representative",
+  //   date: "April - May 2021",
+  //   job_description: `Handled customer service interactions professionally, improving client satisfaction and customer experience through
+  //     consistent support and troubleshooting.`,
+  //   logo: ["logo5.jpeg"],
+  //   banner: ["banner6.jpg"],
+  // },
 ];
 
 export const contact_data = [
@@ -132,4 +133,78 @@ export const contact_data = [
     image:["contact3.png"],
     href: "mailto:pajarilla.gliezelann@gmail.com",
   },
+];
+
+export const documentation_data = [
+  {
+    title: "Research Assistant",
+    folder: "RA",
+    img1: ["RA1.jpg", "RA2.jpg", "RA3.jpg"],
+    // img2: ["RA1.jpg"],
+    // img3:["RA3.jpg"],
+    credits: "Photos by O.N.E for Juan",
+  },
+
+  {
+    title: "Bioinformatics Intern",
+    folder: "PGCV",
+    img1: ["PGCV1.JPEG", "PGCV2.jpg", "PGCV3.jpg"],
+    // img2: ["PGCV2.jpg"],
+    // img3: ["PGCV3.jpg"],
+    credits: "Photos by PGC Visayas",
+  },
+
+  {
+  title: "Special Problem",
+  folder: "SP",
+  img1: ["SP2.jpeg", "SP4.jpg", "SP3.jpeg"],
+  // img2: ["SP2.jpg"],
+  // img3: ["SP3.jpg"],
+  credits: "Photos by Special Problem Team",
+  },
+
+  {
+    title: "PawPal",
+    folder: "Paw",
+    img1: ["Paw1.jpg", "Paw2.jpg", "Paw3.jpg"],
+    // img2: ["Paw.jpg"],
+    // img3: ["Paw3.jpg"],
+    credits: "Photos by PawPal Team",
+  },
+
+]
+
+export const testimonial_data = [
+  {
+    name: "Arianne",
+    position: "PawPal Team Member",
+    profile: "test1.jpg",
+    testimony:
+      `Gliezel is a hardworking and highly dependable person. 
+      When I worked with her on the same project during our 
+      undergraduate studies, I knew I could count on her in doing
+      the best in the tasks assigned to her. She gets the job done
+      in a timely manner with accuracy and professionalism.
+      She is organized in her tasks and makes sure that she
+      is not a hassle to her co-members.`,
+  },
+  {
+    name: "Czarina",
+    position: "O.N.E for Juan Research Assistant",
+    profile: "test2.jpg",
+    testimony: 
+    `While working with Gliezel, I saw how adaptive and eager she
+    was to deliver. Our research project would typically attract
+    people from the social sciences, but that didn't hinder Glee
+    from doing well. She actively listened and practiced in our
+    dry run. Likewise, during our fieldwork, she continuously
+    evaluates her performance so she can do better for the
+    next task. She also spared her time volunteering for the 
+    National Epilepsy Month together with one of our head 
+    researchers. Gliezel has a good grasp of her skills and is
+    willing to go beyond what is asked. During my time with Glee,
+    I see her develop her abilities and perspective as a 
+    researcher and a person in general. And if given another 
+    opportunity, I'll gladly work with her again.`
+  }
 ];
