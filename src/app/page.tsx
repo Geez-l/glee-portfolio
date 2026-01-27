@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useState } from "react";
 import Image from "next/image";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
@@ -9,6 +10,16 @@ import ContactModal from "../app/component/contact";
 
 
 export default function Home() {
+const [expanded, setExpanded] = useState<number[]>([]);
+
+const toggleExpand = (index: number) => {
+  setExpanded((prevExpanded) =>
+  prevExpanded.includes(index)
+      ? prevExpanded.filter((i) => i !== index)
+      : [...prevExpanded, index]
+    );
+};
+
   return (
     <div>
       {/* HEADER SECTION */}
@@ -36,12 +47,15 @@ export default function Home() {
 
                   {/* Name */}
                   <Card.Title className="fw-bold mb-2.5">
-                    Pajarilla, Gliezel Ann
+                    PAJARILLA, GLIEZEL ANN
                   </Card.Title>
-                  <Card.Text className="mb-1" style={{ lineHeight: "1px" }}>
-                    BS Computer Science
+                  <Card.Text
+                    className="mb-1"
+                    style={{ lineHeight: "2px", paddingTop: "10px" }}
+                  >
+                    University of the Philippines Visayas
                   </Card.Text>
-                  <Card.Text className="mb-1">Iloilo, Philippines</Card.Text>
+                  <Card.Text className="mb-1">BS in Computer Science</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -70,8 +84,6 @@ export default function Home() {
                 >
                   Download CV
                 </a>
-
-                {/* <Button as="a" href="mailto:pajarilla.gliezelann@gmail.com" className="btn btn-success">Contact Me</Button> */}
                 <ContactModal />
               </div>
             </Col>
@@ -160,6 +172,10 @@ export default function Home() {
                       </div>
 
                       <Button
+                        as="a"
+                        href={project.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         variant={
                           isReversed ? "outline-primary" : "outline-light"
                         }
@@ -246,14 +262,20 @@ export default function Home() {
                     {/* Image */}
                     {exp.banner[0] && (
                       <div className="flex-shrink-0 d-flex">
-                        <Image
-                          src={`/assets/banner/${exp.banner[0]}`}
-                          alt={exp.place}
-                          width={300}
-                          height={200}
-                          className="img-fluid rounded shadow"
-                          style={{ objectFit: "cover", height: "100%" }}
-                        />
+                        <a
+                          href={exp.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Image
+                            src={`/assets/banner/${exp.banner[0]}`}
+                            alt={exp.place}
+                            width={300}
+                            height={200}
+                            className="img-fluid rounded shadow"
+                            style={{ objectFit: "cover", height: "100%" }}
+                          />
+                        </a>
                       </div>
                     )}
                   </div>
@@ -267,18 +289,17 @@ export default function Home() {
       {/* DOCUMENTATION USING */}
       <section className="py-5 mt-10" style={{ minHeight: "85vh" }}>
         <Container>
-          <h1 className="fw-bold text-center" style={{ fontSize: "2.5rem" }}>
+          <h1
+            className="fw-bold text-center"
+            style={{ fontSize: "2.5rem", paddingBottom: "20px" }}
+          >
             Documentation
           </h1>
-          {/* <h2 className="fw-bold" style={{ fontSize: "2rem" }}>
-            O.N.E for JUAN
-          </h2> */}
 
           {documentation_data.map((doc, idx) => (
             <div key={idx} className="mb-5">
-              <h3 className="align-items-center justify-content-center">
-                {doc.title}{" "}
-              </h3>
+              {/* Section Title */}
+              <h3 className="mb-4">{doc.title}</h3>
 
               <Row className="justify-content-center">
                 {doc.img1.map((img, i) => (
@@ -287,33 +308,51 @@ export default function Home() {
                     sm={6}
                     xs={12}
                     key={i}
-                    className="mb-3 d-flex justify-content-center"
+                    className="mb-4 d-flex justify-content-center"
                   >
+                    {/* Card */}
                     <div
                       style={{
-                        position: "relative",
                         width: "100%",
-                        maxWidth: "500px", // controls how large they appear
-                        aspectRatio: "16 / 9", // SAME ratio as 2048x1152
-                        overflow: "hidden",
+                        maxWidth: "500px",
                         borderRadius: "0.5rem",
+                        overflow: "hidden",
                         boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)",
+                        backgroundColor: "#fff",
+                        display: "flex",
+                        flexDirection: "column", // ensures caption below image
                       }}
                     >
-                      <Image
-                        src={`/assets/documentation/${doc.folder}/${img}`}
-                        alt={`${doc.title} ${i + 1}`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                      {/* Image */}
+                      <div
                         style={{
-                          objectFit: "cover", // crops excess, no stretching
+                          position: "relative",
+                          width: "100%",
+                          aspectRatio: "16 / 9",
                         }}
-                      />
+                      >
+                        <Image
+                          src={`/assets/documentation/${doc.folder}/${img}`}
+                          alt={`${doc.title} ${i + 1}`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          style={{ objectFit: "cover" }}
+                        />
+                      </div>
+
+                      {/* Caption */}
+                      <div
+                        className="text-center text-muted p-2"
+                        style={{ fontSize: "0.7rem", lineHeight:"0.9rem" }}
+                      >
+                        {doc.caption[i]}
+                      </div>
                     </div>
                   </Col>
                 ))}
               </Row>
 
+              {/* Credits */}
               <div className="text-center text-muted mt-2">{doc.credits}</div>
             </div>
           ))}
@@ -323,37 +362,99 @@ export default function Home() {
       {/* Testimonies */}
       <section className="py-5 mt-10" style={{ minHeight: "85vh" }}>
         <Container>
-          <h1 className="fw-bold text-center" style={{ fontSize: "2.5rem" }}>
+          <h1
+            className="fw-bold text-center"
+            style={{ fontSize: "2.5rem", paddingBottom: "30px" }}
+          >
             Testimony
           </h1>
-              <Row className="justify-content">
-              {testimonial_data.map((test, idx) => (
-                <Col md={6} key={idx} className="mb-4 d-flex justify-content-center">
-                  <div
-                    style={{
-                      backgroundColor:"#2c3e50",
-                      borderRadius: "12px",
-                      padding: "20px",
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-                      display: "flex",
-                      flexDirection:"column",
-                      justifyContent:"space-between",
-                      minHeight: "250px",
-                    }}
-                  >
-                    <p style={{ fontStyle:"italic", marginBottom: "20px", lineHeight:"1.5"}}>
+
+          <Row className="align-items-start">
+            {testimonial_data.map((test, idx) => (
+              <Col
+                md={6}
+                key={idx}
+                className="mb-4 d-flex justify-content-center align-items-start"
+              >
+                <div
+                  style={{
+                    backgroundColor: "#ffffff",
+                    borderRadius: "12px",
+                    border: "1px solid #dee2e6",
+                    padding: "20px",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    width: "100%",
+                    maxWidth: "420px",
+                  }}
+                >
+                  {/* Testimony Text with Fade */}
+                  <div style={{ position: "relative", marginBottom: "10px" }}>
+                    <p
+                      style={{
+                        fontStyle: "italic",
+                        lineHeight: "1.6",
+                        marginBottom: 0,
+                        display: "-webkit-box",
+                        WebkitLineClamp: expanded.includes(idx) ? "unset" : 5,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
                       "{test.testimony}"
                     </p>
 
-                    {/* Profile */}
-                    <div style={{borderTop: "1px solid rgba(255.255.255,0.2)", paddingTop:"10px"}}>
-                      <div style={{fontWeight: "bold"}}>{test.name}</div>
-                      <div style={{fontSize: "0.9rem", opacity: "0.8"}}>{test.position}</div>
+                    {/* Fade overlay when collapsed */}
+                    {!expanded.includes(idx) && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          bottom: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "60px",
+                          background:
+                            "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)",
+                        }}
+                      />
+                    )}
+                  </div>
+
+                  {/* Read More / Less Button */}
+                  <button
+                    onClick={() => toggleExpand(idx)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "#0d6efd",
+                      padding: 0,
+                      marginBottom: "15px",
+                      cursor: "pointer",
+                      fontWeight: 500,
+                      alignSelf: "flex-start",
+                    }}
+                  >
+                    {expanded.includes(idx) ? "Read Less" : "Read More"}
+                  </button>
+
+                  {/* Profile */}
+                  <div
+                    style={{
+                      borderTop: "1px solid rgba(0,0,0,0.1)",
+                      paddingTop: "10px",
+                    }}
+                  >
+                    <div style={{ fontWeight: "bold" }}>{test.name}</div>
+                    <div style={{ fontSize: "0.9rem", opacity: 0.8 }}>
+                      {test.position}
                     </div>
-                    </div>
-                </Col>
-                ))}
-              </Row>
+                  </div>
+                </div>
+              </Col>
+            ))}
+          </Row>
         </Container>
       </section>
 
@@ -374,19 +475,6 @@ export default function Home() {
                 mobile and web, UI/UX, project management, and development.
               </p>
               <div className="d-flex justify-content-center gap-2 mb-3">
-                {/* <button
-                  className="btn btn-primary"
-                  onClick={() => {
-                    const link = document.createElement("a");
-                    link.href = "/assets/Pajarilla_resume.pdf";
-                    link.setAttribute("download", "Pajarilla_resume.pdf");
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                  }}
-                >
-                  Download CV
-                </button> */}
                 <a
                   href="/assets/Pajarilla_resume.pdf"
                   download

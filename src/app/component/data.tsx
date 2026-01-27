@@ -11,6 +11,7 @@ export const projects_data = [
     technology: "Next.js | Express | Web Application",
     banner: "banner1.jpg",
     projectImages: ["project1.svg"],
+    href: "https://github.com/Geez-l/sponge-database",
   },
   {
     title: "Blood Cockles Sex Identification",
@@ -22,6 +23,7 @@ export const projects_data = [
     technology: "Machine Learning | CNN | Python",
     banner: "banner2.jpg",
     projectImages: ["project2.svg"],
+    href: "https://github.com/Geez-l/litoX",
   },
   {
     title: "Crop Yield Prediction",
@@ -32,6 +34,7 @@ export const projects_data = [
     technology: "Machine Learning | Data Analysis | Python",
     banner: "banner3.JPG",
     projectImages: ["project3.svg"],
+    href: "https://github.com/Geez-l/Project_197",
   },
   {
     title: "Pawpal Mobile Application",
@@ -43,6 +46,7 @@ export const projects_data = [
     technology: "React Native | Firebase | Mobile Dev",
     banner: "banner4.jpg",
     projectImages: ["project4.svg"],
+    href: "https://github.com/Geez-l/PawPal",
   },
   {
     title: "Track N Bingein Mobile Application",
@@ -53,6 +57,7 @@ export const projects_data = [
     technology: "Flutter | Dart | Mobile Dev",
     banner: "banner5.jpeg",
     projectImages: ["project5.svg"],
+    href: "https://github.com/Geez-l/trackin_n_bingein",
   },
 ];
 
@@ -65,6 +70,7 @@ export const experiences_data = [
       "Worked on the administrative tasks inside the Gumamela Dorm.",
     logo: ["logo3.jpg"],
     banner: ["banner3.JPG"],
+    href: "https://www.facebook.com/photo/?fbid=1196553469180609&set=a.467465772089386",
   },
   {
     place: "ONE FOR JUAN",
@@ -76,6 +82,7 @@ export const experiences_data = [
       environment where effective communication, oral skills, and comprehensive ability is highly required.`,
     logo: ["logo1.jpeg"],
     banner: ["banner1.jpg"],
+    href: "https://www.facebook.com/photo/?fbid=1240066367912251&set=a.585710143347880",
   },
   {
     place: "PHILIPPINE GENOME CENTER DILIMAN",
@@ -85,6 +92,7 @@ export const experiences_data = [
       Worked on the web application using Next.js architecture, PostgreSQL for the database, and Express for the backend.`,
     logo: ["logo2.png"],
     banner: ["banner2.jpg"],
+    href: "https://www.facebook.com/share/p/17u5b5iTBV/",
   },
   {
     place: "PHILIPPINE GENOME CENTER VISAYAS",
@@ -95,6 +103,7 @@ export const experiences_data = [
       visualizations using R and worked with different tools such as Mega, Tablet, etc.`,
     logo: ["logo2.png"],
     banner: ["banner4.jpg"],
+    href: "https://www.facebook.com/share/p/1HZpo85cor/",
   },
   // {
   //   place: "TRUALLIANT BUSINESS PROCESS OUTSOURCING INC",
@@ -143,6 +152,11 @@ export const documentation_data = [
     // img2: ["RA1.jpg"],
     // img3:["RA3.jpg"],
     credits: "Photos by O.N.E for Juan",
+    caption: [
+      "Survey conducted in the fifth district of Iloilo Province. Together with the research team and project leaders.",
+      "Survey conducted in Anilao, Iloilo. Together with the research assistants and LGUs.",
+      "Pre-distribution photo together with the research team and project coordinator.",
+    ],
   },
 
   {
@@ -152,15 +166,25 @@ export const documentation_data = [
     // img2: ["PGCV2.jpg"],
     // img3: ["PGCV3.jpg"],
     credits: "Photos by PGC Visayas",
+    caption: [
+      "First day of Internship at PGC Visayas. With fellow interns and the project development officer.",
+      "Awarding of certificates to the interns who completed the internship. Together with the PGC Visayas staff.",
+      "Culminating activity of the internship program with fellow interns.",
+    ],
   },
 
   {
-  title: "Special Problem",
-  folder: "SP",
-  img1: ["SP2.jpeg", "SP4.jpg", "SP3.jpeg"],
-  // img2: ["SP2.jpg"],
-  // img3: ["SP3.jpg"],
-  credits: "Photos by Special Problem Team",
+    title: "Special Problem",
+    folder: "SP",
+    img1: ["SP2.jpeg", "SP4.jpg", "SP3.jpeg"],
+    // img2: ["SP2.jpg"],
+    // img3: ["SP3.jpg"],
+    credits: "Photos by Special Problem Team",
+    caption: [
+      "Group photo after the final presentation of the special problem.",
+      " After presentation photo together with the project technical assistants, adviser, co-adviser, and the panelists.",
+      "Group photo after the final presentation of the special problem.",
+    ],
   },
 
   {
@@ -170,9 +194,13 @@ export const documentation_data = [
     // img2: ["Paw.jpg"],
     // img3: ["Paw3.jpg"],
     credits: "Photos by PawPal Team",
+    caption: [
+      "Group photo before the presentation of PawPal mobile application.",
+      "Group photo after the final presentation of mobile application",
+      "Group photo before the presentation of PawPal mobile application.",
+    ],
   },
-
-]
+];
 
 export const testimonial_data = [
   {
