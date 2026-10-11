@@ -3,515 +3,331 @@
 import React from "react";
 import { useState } from "react";
 import Image from "next/image";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import { projects_data, experiences_data, documentation_data, contact_data, testimonial_data} from "./component/data";
+import Link from "next/link";
+import {
+  projects_data,
+  experiences_data,
+  documentation_data,
+  contact_data,
+  testimonial_data,
+  skills_data,
+} from "./component/data";
 import ContactModal from "../app/component/contact";
-
+import SiteNavbar from "../app/component/navbar";
+import Hero from "../app/component/hero";
 
 export default function Home() {
-const [expanded, setExpanded] = useState<number[]>([]);
+  const [expanded, setExpanded] = useState<number[]>([]);
 
-const toggleExpand = (index: number) => {
-  setExpanded((prevExpanded) =>
-  prevExpanded.includes(index)
-      ? prevExpanded.filter((i) => i !== index)
-      : [...prevExpanded, index]
+  const toggleExpand = (index: number) => {
+    setExpanded((prevExpanded) =>
+      prevExpanded.includes(index)
+        ? prevExpanded.filter((i) => i !== index)
+        : [...prevExpanded, index]
     );
-};
+  };
 
   return (
     <div>
-      {/* HEADER SECTION */}
-      <section className="py-3 mb-5" style={{ marginTop: "10vh" }}>
-        <Container fluid style={{ maxWidth: "82%" }}>
-          <Row className="w-100 mb-4">
-            {/* PROFILE */}
-            <Col md={4}>
-              <Card
-                className="shadow-sm text-center"
-                style={{ backgroundColor: "#f0f0f0", borderRadius: "8px" }}
-              >
-                <Card.Body>
-                  {/* Profile Image */}
-                  <div className="mb-3">
-                    <Image
-                      src="/assets/CS16.jpg"
-                      width={200}
-                      height={200}
-                      alt="Profile"
-                      className="img-fluid rounded shadow"
-                      style={{ objectFit: "cover" }}
-                    />
-                  </div>
+      <SiteNavbar />
 
-                  {/* Name */}
-                  <Card.Title className="fw-bold mb-2.5">
-                    PAJARILLA, GLIEZEL ANN
-                  </Card.Title>
-                  <Card.Text
-                    className="mb-1"
-                    style={{ lineHeight: "2px", paddingTop: "10px" }}
-                  >
-                    University of the Philippines Visayas
-                  </Card.Text>
-                  <Card.Text className="mb-1">BS in Computer Science</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            {/* INTRO TEXT */}
-            <Col
-              md={8}
-              className="mb-5"
-              style={{ paddingLeft: "50px", paddingTop: "50px" }}
-            >
-              <h1 className="fw-bold" style={{ fontSize: "2.5rem" }}>
-                Research-driven projects are the building blocks of our society
-              </h1>
-              <p className="fst-normal" style={{ fontSize: "1.5rem" }}>
-                Extracting meaning and insights from data, creating projects
-                that are building blocks to something that creates impacts are
-                my inspiration. I am enthusiastic in working with projects that
-                promote welfare and development.
-              </p>
-
-              <div className="d-flex justify-content-center gap-2 mb-3">
-                <a
-                  href="/assets/Pajarilla_resume.pdf"
-                  download
-                  className="btn btn-primary"
-                >
-                  Download CV
-                </a>
-                <ContactModal />
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+      <Hero />
 
       {/* PROJECTS SECTION */}
-      <section className="py-5">
-        <Container>
-          <h1 className="fw-bold mb-4 text-center">Projects I'd Worked On</h1>
+      <section id="projects" className="section">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-heading">Projects I&apos;d Worked On</h2>
+          </div>
 
-          {/* LOOP THROUGH ALL PROJECTS */}
           {projects_data.map((project, idx) => {
-            const isReversed = idx % 2 === 1; // alternating layout
+            const isReversed = idx % 2 === 1;
+            const variant = isReversed ? "light" : "dark";
 
             return (
-              <div key={idx} className="mb-5">
-                <Row className="align-items-center">
-                  {/* IMAGE LEFT IF REVERSED */}
-                  {isReversed && project.projectImages[0] && (
-                    <Col md={4}>
-                      <div className="text-center">
-                        <Image
-                          src={`/assets/projects/${project.projectImages[0]}`}
-                          width={300}
-                          height={200}
-                          alt={project.title}
-                          className="img-fluid rounded shadow"
-                          style={{ objectFit: "cover" }}
-                        />
-                        <div className="mt-2">
-                          <small className="text-uppercase fw-bold">
-                            {project.subsubtitle}
-                          </small>
-                          <div className="text-muted">{project.subtitle}</div>
-                        </div>
-                      </div>
-                    </Col>
-                  )}
+              <div
+                key={idx}
+                className={`project-row ${isReversed ? "reversed" : ""}`}
+              >
+                <div className={`project-card variant-${variant}`}>
+                  <small className="project-eyebrow">Project</small>
 
-                  {/* DESCRIPTION */}
-                  <Col md={8}>
-                    <div
-                      className="p-4"
-                      style={{
-                        backgroundColor: isReversed ? "#f8f9fa" : "#2c3e50",
-                        color: isReversed ? "black" : "white",
-                        borderRadius: "8px",
-                        border: isReversed ? "1px solid #dee2e6" : "none",
-                      }}
-                    >
-                      <small
-                        className={`text-uppercase fw-bold mb-2 d-block ${
-                          isReversed ? "text-primary" : "text-warning"
-                        }`}
-                      >
-                        Project
-                      </small>
+                  <h3 className="card-title">{project.title}</h3>
 
-                      <h3 className="fw-bold mb-3">{project.title}</h3>
+                  <p className="card-text">{project.description}</p>
 
-                      <p className="mb-3">{project.description}</p>
+                  <div className="tech-pills">
+                    {project.technology.split(" | ").map((tech, techIdx) => (
+                      <span key={techIdx} className="tech-pill">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
 
-                      {/* TECHNOLOGY TAGS */}
-                      <div className="d-flex flex-wrap gap-2 mb-3">
-                        {project.technology
-                          .split(" | ")
-                          .map((tech, techIdx) => (
-                            <span
-                              key={techIdx}
-                              className={`px-3 py-1 rounded-pill ${
-                                isReversed
-                                  ? "bg-primary text-white"
-                                  : "bg-light text-dark"
-                              }`}
-                              style={{
-                                fontSize: "0.85rem",
-                                fontWeight: 500,
-                                boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-                              }}
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                      </div>
-
-                      <Button
-                        as="a"
+                  {project.href &&
+                    (project.href.startsWith("/") ? (
+                      <Link href={project.href} className="project-btn">
+                        Read Case Study
+                      </Link>
+                    ) : (
+                      <a
                         href={project.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        variant={
-                          isReversed ? "outline-primary" : "outline-light"
-                        }
-                        size="sm"
+                        className="project-btn"
                       >
-                        VIEW DETAILS
-                      </Button>
-                    </div>
-                  </Col>
+                        View Details
+                      </a>
+                    ))}
+                </div>
 
-                  {/* IMAGE RIGHT IF NOT REVERSED */}
-                  {!isReversed && project.projectImages[0] && (
-                    <Col md={4}>
-                      <div className="text-center">
-                        <Image
-                          src={`/assets/projects/${project.projectImages[0]}`}
-                          width={300}
-                          height={200}
-                          alt={project.title}
-                          className="img-fluid rounded shadow"
-                          style={{ objectFit: "cover" }}
-                        />
-                        <div className="mt-2">
-                          <small className="text-uppercase fw-bold">
-                            {project.subsubtitle}
-                          </small>
-                          <div className="text-muted">{project.subtitle}</div>
-                        </div>
-                      </div>
-                    </Col>
-                  )}
-                </Row>
+                {project.projectImages[0] && (
+                  <div className="project-media">
+                    <div className="project-image-frame">
+                      <Image
+                        src={`/assets/projects/${project.projectImages[0]}`}
+                        alt={project.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 40vw"
+                        style={{
+                          objectFit: "cover",
+                          objectPosition: project.imagePosition ?? "center",
+                        }}
+                      />
+                    </div>
+                    <div className="project-caption">
+                      <small className="project-caption-kicker">
+                        {project.subsubtitle}
+                      </small>
+                      <div className="text-muted-small">{project.subtitle}</div>
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}
-        </Container>
+        </div>
       </section>
 
       {/* EXPERIENCE SECTION */}
-      <section className="py-5">
+      <section id="experience" className="section section-alt">
         <div className="container">
-          <h1 className="fw-bold mb-5 text-center">Experiences</h1>
+          <div className="section-header">
+            <h2 className="section-heading">Experience</h2>
+          </div>
 
-          <div className="position-relative">
-            <div
-              className="position-absolute top-0 start-0"
-              style={{
-                width: "4px",
-                height: "100%",
-                backgroundColor: "#5e5d5cff",
-              }}
-            ></div>
+          <div className="timeline">
+            <div className="timeline-rail"></div>
 
-            <div className="timeline">
-              {experiences_data.map((exp, idx) => (
-                <div
-                  key={idx}
-                  className="d-flex mb-5 position-relative align-items-start"
-                >
-                  {/* Dot */}
-                  <div
-                    className="rounded-circle bg-warning position-absolute"
-                    style={{
-                      width: "16px",
-                      height: "16px",
-                      left: "-6px",
-                      top: "10px",
-                    }}
-                  ></div>
+            {experiences_data.map((exp, idx) => (
+              <div key={idx} className="timeline-item">
+                <div className="timeline-dot"></div>
 
-                  {/* Content and Image inline */}
-                  <div className="ms-5 d-flex w-100 gap-4 align-items-stretch">
-                    {/* Text content */}
-                    <div className="flex-grow-1 p-4 bg-white rounded shadow">
-                      <small className="text-warning text-uppercase fw-bold mb-1 d-block">
-                        Experience
-                      </small>
-                      <h3 className="fw-bold mb-1">{exp.place}</h3>
-                      <div className="mb-1">{exp.position}</div>
-                      <div className="mb-2 text-muted">{exp.date}</div>
-                      <p className="mb-0">{exp.job_description}</p>
-                    </div>
-
-                    {/* Image */}
-                    {exp.banner[0] && (
-                      <div className="flex-shrink-0 d-flex">
-                        <a
-                          href={exp.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Image
-                            src={`/assets/banner/${exp.banner[0]}`}
-                            alt={exp.place}
-                            width={300}
-                            height={200}
-                            className="img-fluid rounded shadow"
-                            style={{ objectFit: "cover", height: "100%" }}
-                          />
-                        </a>
-                      </div>
+                <div className="surface-card hoverable timeline-card">
+                  <div className="timeline-body">
+                    <h3 className="timeline-place">{exp.place}</h3>
+                    <div className="timeline-position">{exp.position}</div>
+                    <div className="timeline-date text-muted-small">{exp.date}</div>
+                    <p className="card-text">{exp.job_description}</p>
+                    {exp.highlights && (
+                      <ul className="timeline-highlights">
+                        {exp.highlights.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
                     )}
                   </div>
+
+                  {exp.banner[0] && (
+                    <a
+                      href={exp.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="timeline-banner-link"
+                    >
+                      <div className="timeline-banner-frame">
+                        <Image
+                          src={`/assets/banner/${exp.banner[0]}`}
+                          alt={exp.place}
+                          fill
+                          sizes="220px"
+                          style={{ objectFit: "cover" }}
+                        />
+                      </div>
+                    </a>
+                  )}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* DOCUMENTATION USING */}
-      <section className="py-5 mt-10" style={{ minHeight: "85vh" }}>
-        <Container>
-          <h1
-            className="fw-bold text-center"
-            style={{ fontSize: "2.5rem", paddingBottom: "20px" }}
-          >
-            Documentation
-          </h1>
+      {/* SKILLS SECTION */}
+      <section id="skills" className="section">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-heading">Skills &amp; Tools</h2>
+          </div>
 
-          {documentation_data.map((doc, idx) => (
-            <div key={idx} className="mb-5">
-              {/* Section Title */}
-              <h3 className="mb-4">{doc.title}</h3>
-
-              <Row className="justify-content-center">
-                {doc.img1.map((img, i) => (
-                  <Col
-                    md={4}
-                    sm={6}
-                    xs={12}
-                    key={i}
-                    className="mb-4 d-flex justify-content-center"
-                  >
-                    {/* Card */}
-                    <div
-                      style={{
-                        width: "100%",
-                        maxWidth: "500px",
-                        borderRadius: "0.5rem",
-                        overflow: "hidden",
-                        boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)",
-                        backgroundColor: "#fff",
-                        display: "flex",
-                        flexDirection: "column", // ensures caption below image
-                      }}
-                    >
-                      {/* Image */}
-                      <div
-                        style={{
-                          position: "relative",
-                          width: "100%",
-                          aspectRatio: "16 / 9",
-                        }}
-                      >
-                        <Image
-                          src={`/assets/documentation/${doc.folder}/${img}`}
-                          alt={`${doc.title} ${i + 1}`}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          style={{ objectFit: "cover" }}
-                        />
-                      </div>
-
-                      {/* Caption */}
-                      <div
-                        className="text-center text-muted p-2"
-                        style={{ fontSize: "0.7rem", lineHeight:"0.9rem" }}
-                      >
-                        {doc.caption[i]}
-                      </div>
-                    </div>
-                  </Col>
-                ))}
-              </Row>
-
-              {/* Credits */}
-              <div className="text-center text-muted mt-2">{doc.credits}</div>
-            </div>
-          ))}
-        </Container>
+          <div className="surface-card skills-board">
+            {skills_data.map((skill, idx) => (
+              <div key={idx} className="skills-col">
+                <h3 className="skills-group">{skill.group}</h3>
+                <ul className="skills-list">
+                  {skill.items.map((item, i) => (
+                    <li key={i}>
+                      {item.icon ? (
+                        <svg
+                          className="skill-icon"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d={item.icon.path} />
+                        </svg>
+                      ) : (
+                        <span className="skill-icon" aria-hidden="true" />
+                      )}
+                      {item.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
-      {/* Testimonies */}
-      <section className="py-5 mt-10" style={{ minHeight: "85vh" }}>
-        <Container>
-          <h1
-            className="fw-bold text-center"
-            style={{ fontSize: "2.5rem", paddingBottom: "30px" }}
-          >
-            Testimony
-          </h1>
+      {/* DOCUMENTATION SECTION */}
+      <section id="documentation" className="section section-alt">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-heading">Documentation</h2>
+          </div>
 
-          <Row className="align-items-start">
-            {testimonial_data.map((test, idx) => (
-              <Col
-                md={6}
-                key={idx}
-                className="mb-4 d-flex justify-content-center align-items-start"
-              >
-                <div
-                  style={{
-                    backgroundColor: "#ffffff",
-                    borderRadius: "12px",
-                    border: "1px solid #dee2e6",
-                    padding: "20px",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    width: "100%",
-                    maxWidth: "420px",
-                  }}
-                >
-                  {/* Testimony Text with Fade */}
-                  <div style={{ position: "relative", marginBottom: "10px" }}>
-                    <p
-                      style={{
-                        fontStyle: "italic",
-                        lineHeight: "1.6",
-                        marginBottom: 0,
-                        display: "-webkit-box",
-                        WebkitLineClamp: expanded.includes(idx) ? "unset" : 5,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                      }}
-                    >
-                      "{test.testimony}"
-                    </p>
+          {documentation_data.map((doc, idx) => (
+            <div key={idx} className="doc-group">
+              <h3 className="card-title doc-title">{doc.title}</h3>
 
-                    {/* Fade overlay when collapsed */}
-                    {!expanded.includes(idx) && (
-                      <div
-                        style={{
-                          position: "absolute",
-                          bottom: 0,
-                          left: 0,
-                          width: "100%",
-                          height: "60px",
-                          background:
-                            "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)",
-                        }}
+              <div className="doc-grid">
+                {doc.img1.map((img, i) => (
+                  <div key={i} className="surface-card hoverable doc-card">
+                    <div className="doc-card-image">
+                      <Image
+                        src={`/assets/documentation/${doc.folder}/${img}`}
+                        alt={`${doc.title} ${i + 1}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        style={{ objectFit: "cover" }}
                       />
-                    )}
-                  </div>
-
-                  {/* Read More / Less Button */}
-                  <button
-                    onClick={() => toggleExpand(idx)}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      color: "#0d6efd",
-                      padding: 0,
-                      marginBottom: "15px",
-                      cursor: "pointer",
-                      fontWeight: 500,
-                      alignSelf: "flex-start",
-                    }}
-                  >
-                    {expanded.includes(idx) ? "Read Less" : "Read More"}
-                  </button>
-
-                  {/* Profile */}
-                  <div
-                    style={{
-                      borderTop: "1px solid rgba(0,0,0,0.1)",
-                      paddingTop: "10px",
-                    }}
-                  >
-                    <div style={{ fontWeight: "bold" }}>{test.name}</div>
-                    <div style={{ fontSize: "0.9rem", opacity: 0.8 }}>
-                      {test.position}
                     </div>
+                    <div className="doc-caption">{doc.caption[i]}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="doc-credits text-muted-small">{doc.credits}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* TESTIMONIALS SECTION */}
+      <section id="testimonials" className="section">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-heading">Testimonials</h2>
+          </div>
+
+          <div className="testimonial-grid">
+            {testimonial_data.map((test, idx) => (
+              <div key={idx} className="surface-card hoverable testimonial-card">
+                <div className="testimonial-quote-wrap">
+                  <p
+                    className={`testimonial-quote ${
+                      expanded.includes(idx) ? "" : "clamped"
+                    }`}
+                  >
+                    {test.testimony}
+                  </p>
+
+                  {!expanded.includes(idx) && <div className="testimonial-fade" />}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => toggleExpand(idx)}
+                  className="read-more-btn"
+                >
+                  {expanded.includes(idx) ? "Read Less" : "Read More"}
+                </button>
+
+                <div className="testimonial-author">
+                  <div className="testimonial-avatar">{test.name.charAt(0)}</div>
+                  <div>
+                    <div className="testimonial-name">{test.name}</div>
+                    <div className="text-muted-small">{test.position}</div>
                   </div>
                 </div>
-              </Col>
+              </div>
             ))}
-          </Row>
-        </Container>
+          </div>
+        </div>
       </section>
 
       {/* GET IN TOUCH SECTION */}
-      <section className="py-5 mt-10" style={{ minHeight: "85vh" }}>
-        <Container>
-          {/* Centered Heading and Text */}
-          <Row className="justify-content-center text-center mb-5">
-            <Col md={8}>
-              <h1 className="mb-3" style={{ fontSize: "1.5rem" }}>
-                Get in Touch
-              </h1>
-              <h2 className="fw-bold mb-3" style={{ fontSize: "2.5rem" }}>
-                Let's Work Together
-              </h2>
-              <p>
-                I'm open to new opportunities involving software engineering:
-                mobile and web, UI/UX, project management, and development.
-              </p>
-              <div className="d-flex justify-content-center gap-2 mb-3">
-                <a
-                  href="/assets/Pajarilla_resume.pdf"
-                  download
-                  className="btn btn-primary"
-                >
-                  Download CV
-                </a>
+      <section id="contact" className="section section-alt">
+        <div className="container">
+          <div className="contact-intro">
+            <h1 className="contact-eyebrow">Get in Touch</h1>
+            <h2 className="section-heading">Let&apos;s Work Together</h2>
+            <p className="section-subtext">
+              I&apos;m open to new opportunities involving software
+              engineering: mobile and web, UI/UX, project management, and
+              development.
+            </p>
+            <div className="cta-row">
+              <a href="/assets/Pajarilla_resume.pdf" download className="btn-glee-primary">
+                Download CV
+              </a>
+              <ContactModal />
+            </div>
+          </div>
 
-                <ContactModal />
-              </div>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col className="d-flex justify-content-end gap-2">
-              {contact_data.map((contact, idx) => (
-                <div key={idx} className="text-end">
-                  <a
-                    href={contact.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+          <div className="contact-links">
+            {contact_data.map((contact, idx) => (
+              <a
+                key={idx}
+                href={contact.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-link"
+              >
+                <div className="contact-icon-badge">
+                  <div style={{ position: "relative", width: 22, height: 22 }}>
                     <Image
                       src={`/assets/contact/${contact.image[0]}`}
-                      width={30}
-                      height={40}
                       alt={contact.type}
-                      className="img-fluid rounded shadow"
-                      style={{ objectFit: "cover" }}
+                      fill
+                      sizes="22px"
+                      style={{ objectFit: "contain" }}
                     />
-                  </a>
+                  </div>
                 </div>
-              ))}
-            </Col>
-          </Row>
-        </Container>
+                <div className="contact-icon-label">{contact.type}</div>
+              </a>
+            ))}
+          </div>
+        </div>
       </section>
+
+      {/* FOOTER */}
+      <footer className="glee-footer">
+        <div className="container">
+          © {new Date().getFullYear()} Gliezel Ann Pajarilla.
+        </div>
+      </footer>
     </div>
   );
 }

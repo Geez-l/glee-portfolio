@@ -1,50 +1,64 @@
 "use client";
-import { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { useRef } from "react";
 
 export default function ContactModal() {
-  const [show, setShow] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const handleShow = () => dialogRef.current?.showModal();
+  const handleClose = () => dialogRef.current?.close();
 
   return (
     <>
-      {/* Button that opens the modal */}
-      {/* <Button variant="outline-primary" onClick={handleShow}>
+      <button type="button" className="btn-glee-outline" onClick={handleShow}>
         Contact Me
-      </Button> */}
-      <button type="button" className="btn btn-success" onClick={handleShow}>Contact Me</button>
+      </button>
 
-      {/* Modal */}
-      <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Send a Message</Modal.Title>
-        </Modal.Header>
+      <dialog
+        ref={dialogRef}
+        className="glee-modal"
+        aria-labelledby="contact-modal-title"
+        onClick={(e) => {
+          // Clicks on the backdrop target the <dialog> itself
+          if (e.target === e.currentTarget) handleClose();
+        }}
+      >
+        <div className="glee-modal-header">
+          <h2 id="contact-modal-title" className="glee-modal-title">
+            Send a Message
+          </h2>
+          <button
+            type="button"
+            className="glee-modal-close"
+            aria-label="Close"
+            onClick={handleClose}
+          >
+            &times;
+          </button>
+        </div>
 
-        <Modal.Body>
-          <Form action="https://formspree.io/f/xqakzdqa" method="POST">
-            <Form.Group className="mb-3">
-              <Form.Label>Your Name</Form.Label>
-              <Form.Control type="text" name="name" required />
-            </Form.Group>
+        <div className="glee-modal-body">
+          <form action="https://formspree.io/f/xqakzdqa" method="POST">
+            <div className="form-group">
+              <label htmlFor="contact-name" className="form-label">Your Name</label>
+              <input id="contact-name" className="form-control" type="text" name="name" required />
+            </div>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Your Email</Form.Label>
-              <Form.Control type="email" name="email" required />
-            </Form.Group>
+            <div className="form-group">
+              <label htmlFor="contact-email" className="form-label">Your Email</label>
+              <input id="contact-email" className="form-control" type="email" name="email" required />
+            </div>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Message</Form.Label>
-              <Form.Control as="textarea" rows={4} name="message" required />
-            </Form.Group>
+            <div className="form-group form-group-last">
+              <label htmlFor="contact-message" className="form-label">Message</label>
+              <textarea id="contact-message" className="form-control" rows={4} name="message" required />
+            </div>
 
-            <Button variant="primary" type="submit" className="w-100">
+            <button type="submit" className="btn-glee-primary btn-block">
               Send Message
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
+            </button>
+          </form>
+        </div>
+      </dialog>
     </>
   );
 }

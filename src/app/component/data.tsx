@@ -1,17 +1,54 @@
-import test from "node:test";
+import {
+  type SimpleIcon,
+  siCypress,
+  siDocker,
+  siExpress,
+  siFirebase,
+  siFlutter,
+  siGitea,
+  siKeycloak,
+  siMinio,
+  siNextdotjs,
+  siNodedotjs,
+  siOpenapiinitiative,
+  siPostgresql,
+  siPrisma,
+  siPython,
+  siR,
+  siReact,
+  siReacthookform,
+  siTailwindcss,
+  siTanstack,
+  siVitest,
+  siZod,
+} from "simple-icons";
 
 export const projects_data = [
   {
+    title: "Philippine Sponge Database",
+    description: `The production rebuild of the Philippine Sponge Guide at the Philippine Genome
+      Center Diliman. A curated reference of marine sponge specimens collected by UP MSI, with a
+      7-stage ETL pipeline, a role-gated curator admin panel, bulk import with diff preview,
+      a full audit trail, and fuzzy search.`,
+    subsubtitle: "PGC DILIMAN · 2026 – PRESENT",
+    subtitle: "FULL-STACK BIODIVERSITY DATABASE",
+    technology: "Next.js | Prisma | PostgreSQL | Keycloak | MinIO | Kubernetes",
+    banner: "banner_pgc_official_site.jpg",
+    projectImages: ["sponge_db_site.jpg"],
+    imagePosition: "left center",
+    href: "/projects/sponge-db",
+  },
+  {
     title: "The Philippine Sponge Guide",
-    description: `The Philippine Sponge Guide is a searchable database of information
-      on marine sponges in the Philippines as collected by the Marine Science 
-      Institute of the University of the Philippines Diliman (UP MSI).`,
-    subsubtitle: "MARINE SPONGE DATABASE",
+    description: `The internship prototype of the sponge database: a searchable site of
+      Philippine marine sponges collected by the Marine Science Institute of the
+      University of the Philippines Diliman (UP MSI), built during the PGC Bioinformatics
+      Training and Internship Program.`,
+    subsubtitle: "PGC INTERNSHIP PROJECT · 2025",
     subtitle: "SPONGE DATA WEB APP",
-    technology: "Next.js | Express | Web Application",
+    technology: "Next.js | Express | PostgreSQL",
     banner: "banner1.jpg",
     projectImages: ["project1.svg"],
-    href: "https://github.com/Geez-l/sponge-database",
   },
   {
     title: "Blood Cockles Sex Identification",
@@ -63,6 +100,21 @@ export const projects_data = [
 
 export const experiences_data = [
   {
+    place: "PHILIPPINE GENOME CENTER DILIMAN",
+    position: "Junior Developer",
+    date: "March 2026 - Present",
+    job_description:
+      "Full-stack developer of the Philippine Sponge Database, the production database of marine sponge specimens collected by the UP Marine Science Institute.",
+    highlights: [
+      "Built the data pipeline that turns researcher spreadsheets into live database records",
+      "Built the admin tools curators use to add, update, and track changes to specimen data",
+      "Improved search and set up storage, deployment, and testing for the production site",
+    ],
+    logo: ["banner_pgc_official_site.jpg"],
+    banner: ["banner_pgc_official_site.jpg"],
+    href: "https://pgc.up.edu.ph/",
+  },
+  {
     place: "UPV BALAY GUMAMELA",
     position: "Student Assistant",
     date: "February - June 2023, September - May 2025, August - December 2025",
@@ -86,7 +138,7 @@ export const experiences_data = [
   },
   {
     place: "PHILIPPINE GENOME CENTER DILIMAN",
-    position: "Intern, Bionformatics Training and Internship Program",
+    position: "Intern, Bioinformatics Training and Internship Program",
     date: "July - August 2025",
     job_description: `Student intern for the Bioinformatics Training and Internship Program of the Philippine Genome Center.
       Worked on the web application using Next.js architecture, PostgreSQL for the database, and Express for the backend.`,
@@ -235,4 +287,60 @@ export const testimonial_data = [
     researcher and a person in general. And if given another 
     opportunity, I'll gladly work with her again.`
   }
+];
+export const skills_data: { group: string; items: { name: string; icon?: SimpleIcon }[] }[] = [
+  {
+    group: "Frontend",
+    items: [
+      { name: "React", icon: siReact },
+      { name: "Next.js", icon: siNextdotjs },
+      { name: "Tailwind CSS", icon: siTailwindcss },
+      { name: "TanStack Table", icon: siTanstack },
+      { name: "React Hook Form", icon: siReacthookform },
+      { name: "React Native", icon: siReact },
+      { name: "Flutter", icon: siFlutter },
+      { name: "SEO" },
+    ],
+  },
+  {
+    group: "Backend & Data",
+    items: [
+      { name: "Node.js", icon: siNodedotjs },
+      { name: "Express", icon: siExpress },
+      { name: "Prisma", icon: siPrisma },
+      { name: "PostgreSQL", icon: siPostgresql },
+      { name: "Zod", icon: siZod },
+      { name: "OpenAPI", icon: siOpenapiinitiative },
+      { name: "Firebase", icon: siFirebase },
+      { name: "ETL Pipelines" },
+    ],
+  },
+  {
+    group: "Infrastructure",
+    items: [
+      { name: "Docker", icon: siDocker },
+      { name: "Gitea Actions", icon: siGitea },
+      { name: "MinIO / S3", icon: siMinio },
+      { name: "Keycloak", icon: siKeycloak },
+    ],
+  },
+  {
+    group: "Testing",
+    items: [
+      { name: "Vitest", icon: siVitest },
+      { name: "Cypress", icon: siCypress },
+      { name: "Playwright" },
+    ],
+  },
+  {
+    group: "Research",
+    items: [
+      { name: "Python", icon: siPython },
+      { name: "R", icon: siR },
+      { name: "Machine Learning" },
+      { name: "CNN" },
+      { name: "MEGA" },
+      { name: "Tablet" },
+    ],
+  },
 ];

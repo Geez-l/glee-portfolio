@@ -6,16 +6,16 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predev": "node scripts/sync-cv.mjs",
+    "prebuild": "node scripts/sync-cv.mjs"
   },
   "dependencies": {
-    "bootstrap": "^5.3.7",
     "next": "^15.5.7",
     "react": "19.1.0",
-    "react-bootstrap": "^2.10.10",
     "react-dom": "19.1.0",
-    "reactstrap": "^9.2.3",
-    "sass": "^1.90.0"
+    "sass": "^1.90.0",
+    "simple-icons": "^16.34.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

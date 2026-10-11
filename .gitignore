@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# unused assets
+/public/assets/banner/banner_pgc_diliman_map.jpg
+/public/assets/banner/banner_sponge_guide_site.svg
